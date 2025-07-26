@@ -4,8 +4,8 @@ import 'package:todoapp/screens/home_page.dart';
 import 'package:todoapp/utils/app_string.dart';
 import 'package:todoapp/custom_widget/custom_text_field.dart';
 import 'package:todoapp/screens/signup_screen.dart';
-import 'dart:convert';
-import 'package:http/http.dart' as http;
+// import 'dart:convert';
+// import 'package:http/http.dart' as http;
 
 void main() => runApp(LoginScreen());
 
@@ -19,51 +19,50 @@ class LoginScreen extends StatefulWidget {
 class _LoginScreenState extends State<LoginScreen> {
   bool rememberMe = false;
   final formkey = GlobalKey<FormState>();
-  final GlobalKey emailFieldKey = GlobalKey();
-  final GlobalKey passFieldKey = GlobalKey();
+  // final GlobalKey emailFieldKey = GlobalKey();
+  // final GlobalKey passFieldKey = GlobalKey();
 
   final TextEditingController emailController = TextEditingController();
 
   final TextEditingController passController = TextEditingController();
 
-  final String baseUrl = "http://172.252.13.83:2000/api/v1/auth/login";
+  // final String baseUrl = "http://172.252.13.83:2000/api/v1/auth/login";
 
-  Future<bool> loginUser(String email, String password) async {
-    final url = Uri.parse(baseUrl);
-
-  try {
-    final response = await http.post(
-      url,
-      headers: {"Content-Type": "application/json"},
-      body: jsonEncode({
-        "email": email,
-        "password": password,
-      }),
-    );
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-
-      if (data['success'] == true) {
-        final token = data['data']['accessToken'];
-        print("Access Token: $token");
-        return true;
-      }
-      else {
-        print("Login failed: ${data['message']}");
-        return false;
-      }
-    } else {
-      print("Server error: ${response.statusCode}");
-      return false;
-    }
-    } catch (e) {
-    print("Error occurred: $e");
-    return false;
-  }
-  }
+  // Future<bool> loginUser(String email, String password) async {
+  //   final url = Uri.parse(baseUrl);
+  //
+  // try {
+  //   final response = await http.post(
+  //     url,
+  //     headers: {"Content-Type": "application/json"},
+  //     body: jsonEncode({
+  //       "email": email,
+  //       "password": password,
+  //     }),
+  //   );
+  //   if (response.statusCode == 200) {
+  //     final data = jsonDecode(response.body);
+  //
+  //     if (data['success'] == true) {
+  //       final token = data['data']['accessToken'];
+  //       print("Access Token: $token");
+  //       return true;
+  //     }
+  //     else {
+  //       print("Login failed: ${data['message']}");
+  //       return false;
+  //     }
+  //   } else {
+  //     print("Server error: ${response.statusCode}");
+  //     return false;
+  //   }
+  //   } catch (e) {
+  //   print("Error occurred: $e");
+  //   return false;
+  // }
+  // }
   @override
   Widget build(BuildContext context) {
-    // bool rememberMe = false;
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
@@ -97,7 +96,7 @@ class _LoginScreenState extends State<LoginScreen> {
                     bottom: 5,
                   ),
                   CustomTextField(
-                    key: emailFieldKey,
+                    // key: emailFieldKey,
                     controller: emailController,
                     hintText: "Enter your email",
                     validator: (value){
@@ -131,7 +130,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   ),
 
                   CustomTextField(
-                    key: passFieldKey,
+                    // key: passFieldKey,
                     controller: passController,
                     hintText: "Enter your password",
                     validator: (value) {
@@ -198,8 +197,6 @@ class _LoginScreenState extends State<LoginScreen> {
                         size: 20,
                         color: Colors.black,
                         fontWeight: FontWeight.w500,
-                        // top: 20,
-                        // bottom: 10,
                       ),
                       TextButton(
                         onPressed: () {
@@ -230,13 +227,12 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         ),
 
-                        onPressed: () async{
-
-
- bool isLoggedIn = await loginUser(emailController.text.trim(), passController.text,);                  if(isLoggedIn){
+                       onPressed: () {
+    // async     {
+ // bool isLoggedIn = await loginUser(emailController.text.trim(), passController.text,); if(isLoggedIn) },
    Navigator.push(context, MaterialPageRoute(builder: (context) => HomePage()),);
-                         }
-},
+                         },
+
                         child: Padding(padding: EdgeInsets.symmetric(vertical: 20),
                             child: Text("Log In", style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),)),
                       ),

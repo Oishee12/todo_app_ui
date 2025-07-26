@@ -16,6 +16,9 @@ class CustomTextField extends StatefulWidget {
     this.isPassword = false,
     this.contentPadding,
     this.validator,
+    this.maxLines,
+    this.minLines,
+
   });
 
   final String? text;
@@ -31,6 +34,9 @@ class CustomTextField extends StatefulWidget {
   final bool isPassword;
   final FormFieldValidator<String>? validator;
   final EdgeInsetsGeometry? contentPadding;
+  final int? maxLines;
+  final int? minLines;
+
 
   @override
   State<CustomTextField> createState() => _CustomTextFieldState();
@@ -57,7 +63,7 @@ class _CustomTextFieldState extends State<CustomTextField> {
         children: [
           if (widget.label != null)
             Padding(
-              padding: const EdgeInsets.only(bottom: 4),
+              padding: const EdgeInsets.only(bottom: 2),
               child: Text(
                 widget.label!,
                 style: const TextStyle(fontWeight: FontWeight.bold),
@@ -71,6 +77,8 @@ class _CustomTextFieldState extends State<CustomTextField> {
             autofillHints: null,
             obscureText: widget.isPassword ? _obscureText : false,
             validator: widget.validator,
+            maxLines: widget.maxLines ?? 1,
+            minLines: widget.minLines ?? 1,
 
             decoration: InputDecoration(
               hintText: widget.hintText,
